@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Day You Were Born 🌌</title>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#111c34;
+  --accent:#f8c8dc;
+  --accent2:#a5b4fc;
+  --text:#e2e8f0;
+  --muted:#94a3b8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:radial-gradient(circle at 20% 20%, #1e293b, #0f172a 60%);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* Stars */
+.stars{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.8;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:.2}
+  to{opacity:1}
+}
+
+.wrap{
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px 100px;
+  text-align:center;
+}
+
+h1{
+  font-size:clamp(32px,5vw,52px);
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:var(--muted);
+  max-width:60ch;
+  margin:auto;
+  line-height:1.6;
+}
+
+.section{
+  margin-top:60px;
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+}
+
+button{
+  border:none;
+  padding:12px 20px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  background:linear-gradient(90deg,var(--accent2),var(--accent));
+  color:#0f172a;
+  margin-top:20px;
+}
+
+/* Counter */
+.counter{
+  font-size:20px;
+  margin-top:20px;
+  color:var(--accent);
+}
+
+/* Constellation memory */
+.constellation{
+  position:relative;
+  height:300px;
+  margin-top:20px;
+}
+.point{
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--accent);
+  cursor:pointer;
+  box-shadow:0 0 15px var(--accent);
+}
+.memoryText{
+  margin-top:20px;
+  font-style:italic;
+  color:var(--muted);
+  min-height:40px;
+}
+
+/* Letter */
+.letter{
+  margin-top:20px;
+  white-space:pre-wrap;
+  text-align:left;
+  line-height:1.8;
+  color:var(--text);
+  min-height:120px;
+}
+
+/* Footer */
+.footer{
+  margin-top:80px;
+  font-size:13px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="wrap">
+
+<h1>On This Day, The Universe Changed 🌌</h1>
+<p class="subtitle">
+The stars aligned.  
+Time moved forward.  
+And somewhere in the world, you were born.  
+And without knowing it… my future became brighter.
+</p>
+
+<div class="section">
+<h2>Time Since You Arrived ✨</h2>
+<div class="counter" id="counter"></div>
+</div>
+
+<div class="section">
+<h2>Our Constellation 💫</h2>
+<p>Every glowing point is a memory. Click them.</p>
+
+<div class="constellation">
+<div class="point" style="top:30%;left:20%" data-text="The first time we talked and I knew you were different."></div>
+<div class="point" style="top:60%;left:40%" data-text="The first time you smiled for me and we splash water during the rain."></div>
+<div class="point" style="top:40%;left:70%" data-text="The first 'I miss you' that felt too real."></div>
+<div class="point" style="top:75%;left:80%" data-text="The day I realized I want to marry you."></div>
+</div>
+
+<div class="memoryText" id="memoryText"></div>
+</div>
+
+<div class="section">
+<h2>A Letter Written In The Stars 💌</h2>
+<button onclick="startLetter()">Read</button>
+<div class="letter" id="letter"></div>
+</div>
+
+<div class="footer">
+Happy Birthday, Jyoti.  
+From your husband, Debarshi ❤️
+</div>
+
+</div>
+
+<script>
+// Create stars
+const starsContainer=document.getElementById("stars");
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.top=Math.random()*100+"%";
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=(1+Math.random()*2)+"s";
+  starsContainer.appendChild(s);
+}
+
+// Counter
+const birthDate=new Date("1997-02-25"); // CHANGE HER REAL DOB
+function updateCounter(){
+  const now=new Date();
+  const diff=now-birthDate;
+  const years=Math.floor(diff/(1000*60*60*24*365));
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("counter").innerText=
+  years+" years of making the world better.\n"+
+  days+" days of being extraordinary.";
+}
+updateCounter();
+setInterval(updateCounter,1000);
+
+// Constellation click
+document.querySelectorAll(".point").forEach(p=>{
+  p.addEventListener("click",()=>{
+    document.getElementById("memoryText").innerText=p.dataset.text;
+  });
+});
+
+// Typewriter letter
+const message=`My love,
+
+Today isn't just your birthday.
+
+It’s the anniversary of the day the universe decided
+it needed someone as kind, soft, strong, and beautiful as you.
+
+Even across distance,
+you are the calm in my chaos.
+The warmth in my cold nights.
+The light in my darkest doubts.
+
+One day,
+we will celebrate this birthday in the same room.
+No screens.
+No distance.
+Just you and me.
+
+Until then,
+know this:
+
+I am proud of you.
+I adore you.
+And I choose you — every single day.
+
+Happy Birthday, my wife.
+
+Forever yours,
+Debarshi`;
+
+let i=0;
+function startLetter(){
+  const letter=document.getElementById("letter");
+  letter.innerText="";
+  i=0;
+  const interval=setInterval(()=>{
+    letter.innerText+=message.charAt(i);
+    i++;
+    if(i>=message.length) clearInterval(interval);
+  },25);
+}
+</script>
+
+</body>
+</html>
